@@ -1,24 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import NavBar from "./components/NavBar";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import VideoDetail from "./pages/VideoDetail";
+import Search from "./components/search";
+import SearchResultPage from "./components/searchResultPage";
+import profilePage from "../src/pages/Profile";
+
+import "./App.css";
+import playlistPage from "./pages/playlistPage";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar />
+      <Search />
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/videos/:videoId" component={VideoDetail} />
+        <Route exact path="/search/:searchQuery" component={SearchResultPage} />
+        <Route exact path="/playlists" component={playlistPage} />
+        <Route exact path="/profile" component={profilePage} />
+        <Redirect to="/" />
+      </Switch>
     </div>
   );
 }
